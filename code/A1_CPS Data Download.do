@@ -328,3 +328,4 @@ label define schlcoll_lbl 4 `"College or university part time"', add
 label define schlcoll_lbl 5 `"Does not attend school, college or university"', add
 label values schlcoll schlcoll_lbl
 
+cd "$CD"

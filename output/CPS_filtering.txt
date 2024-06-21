@@ -1,0 +1,45 @@
+------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\mattm\Desktop\Summer_Surge\summer-surge\output/CPS_filtering.txt
+  log type:  text
+ opened on:  20 Jun 2024, 19:08:34
+r; t=0.00 19:08:34
+
+. 
+. ** KEEP BA **
+. tab educ if educ == 111
+
+          Educational attainment recode |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                      Bachelor's degree |    244,261      100.00      100.00
+----------------------------------------+-----------------------------------
+                                  Total |    244,261      100.00
+r; t=0.03 19:08:34
+
+. keep if educ == 111
+(709,263 observations deleted)
+r; t=0.03 19:08:34
+
+. 
+. ** KEEP NOT IN SCHOOL **
+. label list schlcoll_lbl
+schlcoll_lbl:
+           0 NIU
+           1 High school full time
+           2 High school part time
+           3 College or university full time
+           4 College or university part time
+           5 Does not attend school, college or university
+r; t=0.00 19:08:34
+
+. keep if schlcoll == 5
+(52,619 observations deleted)
+r; t=0.01 19:08:34
+
+. 
+. log close
+      name:  <unnamed>
+       log:  C:\Users\mattm\Desktop\Summer_Surge\summer-surge\output/CPS_filtering.txt
+  log type:  text
+ closed on:  20 Jun 2024, 19:08:34
+------------------------------------------------------------------------------------------------
