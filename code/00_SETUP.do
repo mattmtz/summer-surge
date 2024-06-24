@@ -16,6 +16,9 @@ set rmsg on
 global CD "C:\Users\mattm\Desktop\Summer_Surge\summer-surge"
 cd "$CD"
 
+** SET OUTPUT FILE **
+global FILE "output/summer_surge.xlsx"
+
 ** SET IPUMS DATA DOWNLOAD NAME **
 global IPUMS "cps_00002.dat"
 

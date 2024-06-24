@@ -26,6 +26,19 @@ gen tot = empl + unemp
 *** GRAPH FULL TIME SERIES ***
 ******************************
 
+** EXCEL OUTPUT **
+preserve
+	gen day = 1
+	egen dt = concat(month day year), punct(/)
+
+	gsort ym
+	keep dt unemp
+	order dt unemp
+
+	export excel using "$FILE", sheet("time_series", replace) firstrow(variables)
+restore
+
+** STATA GRAPH **
 sum unemp
 local max=`r(max)'
 gen c=`max' if ym>m(2020m2)&ym<m(2020m10)
@@ -79,6 +92,16 @@ forvalues i= 1/3 {
 *** GRAPH DATA ***
 ******************
 
+** EXCEL OUTPUT **
+preserve
+	keep month diff1
+	rename diff1 deviation
+	
+	export excel using "$FILE", firstrow(varl) sheet("deviations", replace)
+restore
+	 
+
+** STATA OUTPUT **
 replace month = mofd(mdy(month,1,1960))
 set scheme s2mono
 line diff1 diff2 diff3 month, legend(subtitle("Choice of baseline") ///
