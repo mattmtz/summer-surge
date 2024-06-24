@@ -1,45 +1,97 @@
-------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
       name:  <unnamed>
        log:  C:\Users\mattm\Desktop\Summer_Surge\summer-surge\output/CPS_filtering.txt
   log type:  text
- opened on:  20 Jun 2024, 19:08:34
-r; t=0.00 19:08:34
+ opened on:  24 Jun 2024, 15:43:28
+r; t=0.00 15:43:28
 
 . 
 . ** KEEP BA **
-. tab educ if educ == 111
+. codebook educ
 
-          Educational attainment recode |      Freq.     Percent        Cum.
-----------------------------------------+-----------------------------------
-                      Bachelor's degree |    244,261      100.00      100.00
-----------------------------------------+-----------------------------------
-                                  Total |    244,261      100.00
-r; t=0.03 19:08:34
+----------------------------------------------------------------------------------------
+educ                                                       Educational attainment recode
+----------------------------------------------------------------------------------------
+
+                  type:  numeric (int)
+                 label:  educ_lbl
+
+                 range:  [2,125]                      units:  1
+         unique values:  16                       missing .:  0/953,524
+
+              examples:  73    High school diploma or equivalent
+                         81    Some college but no degree
+                         81    Some college but no degree
+                         111   Bachelor's degree
+r; t=1.07 15:43:30
 
 . keep if educ == 111
 (709,263 observations deleted)
-r; t=0.03 19:08:34
+r; t=0.03 15:43:30
 
 . 
 . ** KEEP NOT IN SCHOOL **
-. label list schlcoll_lbl
-schlcoll_lbl:
-           0 NIU
-           1 High school full time
-           2 High school part time
-           3 College or university full time
-           4 College or university part time
-           5 Does not attend school, college or university
-r; t=0.00 19:08:34
+. codebook schlcoll
+
+----------------------------------------------------------------------------------------
+schlcoll                                                    School or college attendance
+----------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  schlcoll_lbl
+
+                 range:  [0,5]                        units:  1
+         unique values:  6                        missing .:  0/244,261
+
+            tabulation:  Freq.   Numeric  Label
+                         1,265         0  NIU
+                           262         1  High school full time
+                            35         2  High school part time
+                        40,993         3  College or university full time
+                        10,064         4  College or university part time
+                       191,642         5  Does not attend school, college
+                                          or university
+r; t=0.28 15:43:30
 
 . keep if schlcoll == 5
 (52,619 observations deleted)
-r; t=0.01 19:08:34
+r; t=0.02 15:43:30
 
 . 
+. ** CIVILIAN LABOR FORCE **
+. codebook empstat
+
+----------------------------------------------------------------------------------------
+empstat                                                                Employment status
+----------------------------------------------------------------------------------------
+
+                  type:  numeric (byte)
+                 label:  empstat_lbl
+
+                 range:  [10,36]                      units:  1
+         unique values:  7                        missing .:  0/191,642
+
+            tabulation:  Freq.   Numeric  Label
+                       164,862        10  At work
+                         4,295        12  Has job, not at work last week
+                         7,287        21  Unemployed, experienced worker
+                         1,307        22  Unemployed, new worker
+                           769        32  NILF, unable to work
+                        12,251        34  NILF, other
+                           871        36  NILF, retired
+r; t=0.20 15:43:30
+
+. drop if empstat == 1
+(0 observations deleted)
+r; t=0.00 15:43:30
+
+. count if empstat < 30
+  177,751
+r; t=0.00 15:43:30
+
 . log close
       name:  <unnamed>
        log:  C:\Users\mattm\Desktop\Summer_Surge\summer-surge\output/CPS_filtering.txt
   log type:  text
- closed on:  20 Jun 2024, 19:08:34
-------------------------------------------------------------------------------------------------
+ closed on:  24 Jun 2024, 15:43:30
+----------------------------------------------------------------------------------------

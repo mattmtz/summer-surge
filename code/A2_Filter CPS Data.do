@@ -14,19 +14,24 @@ cd "$CD"
 log using "output/CPS_filtering.txt", text replace
 
 ** KEEP BA **
-tab educ if educ == 111
+codebook educ
 keep if educ == 111
 
 ** KEEP NOT IN SCHOOL **
-label list schlcoll_lbl
+codebook schlcoll
 keep if schlcoll == 5
 
+** CIVILIAN LABOR FORCE **
+codebook empstat
+drop if empstat == 1
+count if empstat < 30
 log close
+
 ******************
 *** CLEAN DATA ***
 ******************
 
-** CREATE UNEMPLOYED FLAG
+** CREATE UNEMPLOYED FLAG **
 gen cln_empstat = ""
 	replace cln_empstat = "employed" if inlist(empstat, 10, 12)
 	replace cln_empstat = "unemployed" if inlist(empstat, 20, 21, 22)
